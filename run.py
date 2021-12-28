@@ -17,7 +17,7 @@ def run_sample(problem_id):
     if not os.path.exists(f'{base_folder}\{contest_id}\{problem_id}'):
         print(f'You have not downloaded sample test cases for problem {problem_id}!')
         print(f'Downloading...')
-        os.system(f'prepare {contest_id} {problem_id}')
+        os.system(f'.\prepare {contest_id} {problem_id}')
         print(f'Sample test case(s) for problem {problem_id} have been downloaded!')
 
     print(f'Running problem {problem_id}...')
