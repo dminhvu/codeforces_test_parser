@@ -7,22 +7,21 @@ import sys
 import subprocess
 import time
 import psutil
-from  threading import Timer
+from threading import Timer
 
 # workspace folder
-workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces" # replace path/to/your/source_file.cpp here
+workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces"  # replace path/to/your/source_file.cpp here
 # contest id, e.g. 1620 for Educational Codeforces Round 119
 base_folder = 'samples'
 contest_id = os.listdir(base_folder)[0]
 
 TIMEOUT_SECOND = 5
 
-def run_sample(problem_id):
 
+def run_sample(problem_id):
     if not os.path.exists(f'{base_folder}\{contest_id}\{problem_id}'):
         print(f'You have not downloaded sample tests for problem {problem_id}!')
-        os.system(f'.\prepare {contest_id} {problem_id}')
-        print(f'Sample test(s) for problem {problem_id} have been downloaded!')
+        os.system(f'.\parse {contest_id} {problem_id}')
 
     print(f'Running problem {problem_id}...')
 
@@ -44,23 +43,24 @@ def run_sample(problem_id):
     os.system(f'g++ "{path_to_cpp_file}" -o "{path_to_exe_file}')
     end_time = time.time()
     print('Successfully compiled!')
-    print(f'Time: {round(end_time - start_time,3)}(s)')
+    print(f'Time: {round(end_time - start_time, 3)}(s)')
     print(f'Memory: {psutil.Process(os.getpid()).memory_info().rss // 1024}(KB)')
     print('-' * 10)
 
-    n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2 # number of sample test cases
-    n_correct = 0 # count correct test cases
+    n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2  # number of sample test cases
+    n_correct = 0  # count correct test cases
     TLE = False
 
     for i in range(n_cases):
         if TLE:
             continue
-        print(f'Sample case #{i+1}:',end=' ')
+        print(f'Sample case #{i + 1}:', end=' ')
         with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
 
             start_time = time.time()
-            process = subprocess.Popen(f'"{path_to_exe_file}"', stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.Popen(f'"{path_to_exe_file}"', stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                       stderr=subprocess.PIPE)
             process.stdin.write(str(inp).encode())
 
             timer = Timer(TIMEOUT_SECOND + 0.1, process.kill)
@@ -114,8 +114,9 @@ def run_sample(problem_id):
     print(f'Result: {n_correct} / {n_cases} test(s) passed!')
     os.remove(f'{workspace_folder}\{contest_id}{problem_id}.exe')
 
-if __name__=='__main__':
-    args =  sys.argv[1:]
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
     try:
         run_sample(args[0])
     except:
