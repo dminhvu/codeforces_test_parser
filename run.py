@@ -5,13 +5,20 @@ import subprocess
 # workspace folder
 workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces" # replace path/to/your/source_file.cpp here
 # contest id, e.g. 1620 for Educational Codeforces Round 119
-contest_id = os.listdir('samples/')[0]
+base_folder = 'samples'
+contest_id = os.listdir(base_folder)[0]
 
 def run_sample(problem_id):
 
-    print(f'Running problem {problem_id}...')
+    if not os.path.exists(f'{base_folder}\{contest_id}\{problem_id}'):
+        print(f'You have not downloaded sample test cases for problem {problem_id}!')
+        print(f'Downloading...')
+        os.system(f'python prepare.py {contest_id} {problem_id}')
+        print(f'Sample test case(s) for problem {problem_id} have been downloaded!')
 
-    if not os.path.exists(f"{workspace_folder}\{contest_id}{problem_id}.cpp"):
+    print(f'Running problem {problem_id}...')
+    
+    if not os.path.exists(f'{workspace_folder}\{contest_id}{problem_id}.cpp'):
         print(f'There is no source file for problem {problem_id}!')
         return
 
@@ -29,12 +36,12 @@ def run_sample(problem_id):
     print('Successfully compiled!')
     print()
 
-    n_cases = len(os.listdir(f'samples/{contest_id}/{problem_id}'))//2 # number of sample test cases
+    n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}'))//2 # number of sample test cases
     n_correct = 0 # count correct test cases
 
     for i in range(n_cases):
         print(f'Sample case #{i+1}:',end=' ')
-        with open(f'samples/{contest_id}/{problem_id}/input{i}.txt') as f:
+        with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
 
             process = subprocess.Popen(f'"{path_to_exe_file}"', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -47,7 +54,7 @@ def run_sample(problem_id):
             your_output = "".join(your_output.splitlines())
             your_output = " ".join(your_output.split()).rstrip('\n')
 
-            with open(f'samples/{contest_id}/{problem_id}/output{i}.txt') as f2:
+            with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt') as f2:
                 # pre-processing actual output, do not change this
                 output = f2.read().strip()
                 original_output = output
@@ -74,7 +81,7 @@ def run_sample(problem_id):
                 print()
 
     print(f'Result: {n_correct}/{n_cases} case(s) passed!')
-    os.remove(f"{workspace_folder}\{contest_id}{problem_id}.exe")
+    os.remove(f'{workspace_folder}\{contest_id}{problem_id}.exe')
 
 if __name__=='__main__':
     args =  sys.argv[1:]
