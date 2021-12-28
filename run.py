@@ -17,7 +17,7 @@ def run_sample(problem_id):
         print(f'Sample test case(s) for problem {problem_id} have been downloaded!')
 
     print(f'Running problem {problem_id}...')
-    
+
     if not os.path.exists(f'{workspace_folder}\{contest_id}{problem_id}.cpp'):
         print(f'There is no source file for problem {problem_id}!')
         return
