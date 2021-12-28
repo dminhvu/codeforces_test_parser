@@ -30,7 +30,7 @@ def generate(contest_id,problem_ids):
                 br.replace_with("\n")
             content = inp.find_next('pre')
             with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt','w') as f:
-                f.writelines(content.text)
+                f.writelines(str(content.text).strip())
 
         outputs = soup.find_all('div', class_='output')
         for i, out in enumerate(outputs):
@@ -38,7 +38,7 @@ def generate(contest_id,problem_ids):
                 br.replace_with("\n")
             content = out.find_next('pre')
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt','w') as f:
-                f.writelines(content.text)
+                f.writelines(str(content.text).strip())
     print('Succesfully downloaded all samples!')
 
 if __name__=='__main__':

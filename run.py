@@ -15,10 +15,10 @@ contest_id = os.listdir(base_folder)[0]
 def run_sample(problem_id):
 
     if not os.path.exists(f'{base_folder}\{contest_id}\{problem_id}'):
-        print(f'You have not downloaded sample test cases for problem {problem_id}!')
+        print(f'You have not downloaded sample tests for problem {problem_id}!')
         print(f'Downloading...')
         os.system(f'.\prepare {contest_id} {problem_id}')
-        print(f'Sample test case(s) for problem {problem_id} have been downloaded!')
+        print(f'Sample test(s) for problem {problem_id} have been downloaded!')
 
     print(f'Running problem {problem_id}...')
 
@@ -71,22 +71,23 @@ def run_sample(problem_id):
                     n_correct += 1
                 else:
                     print('Failed!')
+                print('-' * 10)
                 # input
                 print('Input:')
                 print(inp.rstrip('\n'))
-                print()
-                # output
-                print('Output:')
-                print(original_output)
-                # print(output) # debug
-                print()
+                print('-'*10)
                 # your output
-                print('Your output:')
+                print('Output:')
                 print(original_your_output)
                 # print(your_output) # debug
-                print()
+                print('-'*10)
+                # expected output
+                print('Expected:')
+                print(original_output)
+                # print(output) # debug
+                print('-'*10)
 
-    print(f'Result: {n_correct}/{n_cases} case(s) passed!')
+    print(f'Result: {n_correct} / {n_cases} case(s) passed!')
     os.remove(f'{workspace_folder}\{contest_id}{problem_id}.exe')
 
 if __name__=='__main__':
