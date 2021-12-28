@@ -1,6 +1,6 @@
 # Codeforces Test Parser for C/C++ on Windows
 
-![](https://ibb.co/q9H0092)
+![](https://i.ibb.co/82yzz2Q/example.png)
 
 ### Installation
 * Run ```pip install beautifulsoup4 requests psutil``` in your terminal.
