@@ -78,13 +78,16 @@ def run_sample(problem_id):
             # pre-processing your output, do not change this
             your_output = process.communicate()[0]
             your_output = your_output.decode().strip()
+            your_output = your_output.lower()
             original_your_output = your_output.rstrip('\n')
             your_output = " ".join(your_output.splitlines())
             your_output = " ".join(your_output.split()).rstrip('\n')
 
+
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt') as f2:
                 # pre-processing actual output, do not change this
                 output = f2.read().strip()
+                output = output.lower()
                 original_output = output
                 output = " ".join(output.splitlines())
                 output = " ".join(output.split())
