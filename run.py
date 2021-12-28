@@ -48,10 +48,13 @@ def run_sample(problem_id):
     print(f'Memory: {psutil.Process(os.getpid()).memory_info().rss // 1024}(KB)')
     print('-' * 10)
 
-    n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}'))//2 # number of sample test cases
+    n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2 # number of sample test cases
     n_correct = 0 # count correct test cases
+    TLE = False
 
     for i in range(n_cases):
+        if TLE:
+            continue
         print(f'Sample case #{i+1}:',end=' ')
         with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
@@ -67,6 +70,7 @@ def run_sample(problem_id):
                 end_time = time.time()
                 if end_time - start_time > TIMEOUT_SECOND:
                     print('Time Limit Exceeded!')
+                    TLE = True
                     continue
             finally:
                 timer.cancel()
