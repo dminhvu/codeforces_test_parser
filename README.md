@@ -26,7 +26,7 @@ codeforces_test_parser
 
 ### Usage
 * Use ```./prepare [contest_id] [problem_id1] [problem_id2] ...``` to download sample test cases.
-For example: ```./prepare 1620 A B C D E``` to download problem A, B, C, D, and E.
+For example: ```./prepare 1620 A B C D E``` to download problem A, B, C, D, and E from Educational Codeforces Round 119 (contest id is 1620).
 
 * Use ```./run [problem_id]``` to test (only one problem at a time).
 For example: ```./run A``` for testing problem A.
