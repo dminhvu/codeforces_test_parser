@@ -11,11 +11,12 @@ from bs4 import BeautifulSoup
 base_folder = 'samples'
 
 def generate(contest_id,problem_ids):
+
+    os.makedirs(base_folder, exist_ok=True)
     for folder in os.listdir(base_folder):
         if folder == str(contest_id):
             continue
         shutil.rmtree(f'{base_folder}/{folder}',ignore_errors=True)
-    os.makedirs(base_folder,exist_ok=True)
 
     for problem_id in problem_ids:
         os.makedirs(f'{base_folder}/{contest_id}/{problem_id}',exist_ok=True)
