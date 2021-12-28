@@ -1,5 +1,7 @@
-# Codeforces Test Parser for C/C++
+# Codeforces Test Parser for C/C++ on Windows
+
 ### Installation
+* Run ```pip install beautifulsoup4 requests psutil``` in your terminal.
 * Clone this repository!
 * Change ```workspace_folder``` in ```run.py``` to the folder where your source files are placed in.
 * Please make some changes in ```run.py``` to make it suitable for your folder structure. Below is mine.
