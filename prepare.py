@@ -26,15 +26,19 @@ def generate(contest_id,problem_ids):
 
         inputs = soup.find_all('div', class_='input')
         for i, inp in enumerate(inputs):
+            for br in inp.find_all('br'):
+                br.replace_with("\n")
             content = inp.find_next('pre')
             with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt','w') as f:
-                f.writelines(content.text[1:])
+                f.writelines(content.text)
 
         outputs = soup.find_all('div', class_='output')
         for i, out in enumerate(outputs):
+            for br in out.find_all('br'):
+                br.replace_with("\n")
             content = out.find_next('pre')
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt','w') as f:
-                f.writelines(content.text[1:])
+                f.writelines(content.text)
     print('Succesfully downloaded all samples!')
 
 if __name__=='__main__':

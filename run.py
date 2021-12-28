@@ -53,7 +53,7 @@ def run_sample(problem_id):
 
             # pre-processing your output, do not change this
             your_output = process.communicate()[0]
-            your_output = your_output.decode()
+            your_output = your_output.decode().strip()
             original_your_output = your_output.rstrip('\n')
             your_output = " ".join(your_output.splitlines())
             your_output = " ".join(your_output.split()).rstrip('\n')
