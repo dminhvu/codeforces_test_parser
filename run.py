@@ -55,14 +55,14 @@ def run_sample(problem_id):
             your_output = process.communicate()[0]
             your_output = your_output.decode()
             original_your_output = your_output.rstrip('\n')
-            your_output = "".join(your_output.splitlines())
+            your_output = " ".join(your_output.splitlines())
             your_output = " ".join(your_output.split()).rstrip('\n')
 
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt') as f2:
                 # pre-processing actual output, do not change this
                 output = f2.read().strip()
                 original_output = output
-                output = "".join(output.splitlines())
+                output = " ".join(output.splitlines())
                 output = " ".join(output.split())
 
                 # compare your output vs actual output
@@ -78,10 +78,12 @@ def run_sample(problem_id):
                 # output
                 print('Output:')
                 print(original_output)
+                # print(output) # debug
                 print()
                 # your output
                 print('Your output:')
                 print(original_your_output)
+                # print(your_output) # debug
                 print()
 
     print(f'Result: {n_correct}/{n_cases} case(s) passed!')
