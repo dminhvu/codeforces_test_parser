@@ -1,3 +1,7 @@
+#!"D:\Apps\Python39\python.exe"
+# please replace with your Python installation folder
+# if you do not know where it is, type "where.exe python" in your terminal
+
 import os
 import sys
 import shutil
