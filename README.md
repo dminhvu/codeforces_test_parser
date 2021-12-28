@@ -1,4 +1,4 @@
-# codeforces_test_parser
+# Codeforces test parser for C/C++
 ### Installation
 * Clone this repository!
 * Change ```workspace_folder``` in ```run.py``` to the folder where your source files are placed in.
