@@ -5,6 +5,9 @@
 import os
 import sys
 import subprocess
+import time
+import psutil
+from  threading import Timer
 
 # workspace folder
 workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces" # replace path/to/your/source_file.cpp here
@@ -12,11 +15,12 @@ workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces" #
 base_folder = 'samples'
 contest_id = os.listdir(base_folder)[0]
 
+TIMEOUT_SECOND = 5
+
 def run_sample(problem_id):
 
     if not os.path.exists(f'{base_folder}\{contest_id}\{problem_id}'):
         print(f'You have not downloaded sample tests for problem {problem_id}!')
-        print(f'Downloading...')
         os.system(f'.\prepare {contest_id} {problem_id}')
         print(f'Sample test(s) for problem {problem_id} have been downloaded!')
 
@@ -36,9 +40,13 @@ def run_sample(problem_id):
 
     path_to_cpp_file = f'{workspace_folder}\{contest_id}{problem_id}.cpp'
     path_to_exe_file = f'{workspace_folder}\{contest_id}{problem_id}.exe'
+    start_time = time.time()
     os.system(f'g++ "{path_to_cpp_file}" -o "{path_to_exe_file}')
+    end_time = time.time()
     print('Successfully compiled!')
-    print()
+    print(f'Time: {round(end_time - start_time,3)}(s)')
+    print(f'Memory: {psutil.Process(os.getpid()).memory_info().rss // 1024}(KB)')
+    print('-' * 10)
 
     n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}'))//2 # number of sample test cases
     n_correct = 0 # count correct test cases
@@ -48,8 +56,20 @@ def run_sample(problem_id):
         with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
 
-            process = subprocess.Popen(f'"{path_to_exe_file}"', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+            start_time = time.time()
+            process = subprocess.Popen(f'"{path_to_exe_file}"', stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             process.stdin.write(str(inp).encode())
+
+            timer = Timer(TIMEOUT_SECOND + 0.1, process.kill)
+            try:
+                timer.start()
+                process.communicate()
+                end_time = time.time()
+                if end_time - start_time > TIMEOUT_SECOND:
+                    print('Time Limit Exceeded!')
+                    continue
+            finally:
+                timer.cancel()
 
             # pre-processing your output, do not change this
             your_output = process.communicate()[0]
@@ -75,19 +95,19 @@ def run_sample(problem_id):
                 # input
                 print('Input:')
                 print(inp.rstrip('\n'))
-                print('-'*10)
+                print('-' * 10)
                 # your output
                 print('Output:')
                 print(original_your_output)
                 # print(your_output) # debug
-                print('-'*10)
+                print('-' * 10)
                 # expected output
                 print('Expected:')
                 print(original_output)
                 # print(output) # debug
-                print('-'*10)
+                print('-' * 10)
 
-    print(f'Result: {n_correct} / {n_cases} case(s) passed!')
+    print(f'Result: {n_correct} / {n_cases} test(s) passed!')
     os.remove(f'{workspace_folder}\{contest_id}{problem_id}.exe')
 
 if __name__=='__main__':

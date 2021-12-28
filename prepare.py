@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 base_folder = 'samples'
 
 def generate(contest_id,problem_ids):
-
+    print(f'Downloading...')
     os.makedirs(f'{base_folder}\{contest_id}', exist_ok=True)
     for folder in os.listdir(base_folder):
         if folder == str(contest_id):
