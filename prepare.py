@@ -1,5 +1,5 @@
-#!"D:\Apps\Python39\python.exe"
-# please replace with your Python installation folder
+#!"python"
+# in case this file does not run, please replace "python" with your "path/to/python.exe"
 # if you do not know where it is, type "where.exe python" in your terminal
 
 import os
@@ -12,7 +12,7 @@ base_folder = 'samples'
 
 def generate(contest_id,problem_ids):
 
-    os.makedirs(base_folder, exist_ok=True)
+    os.makedirs(f'{base_folder}\{contest_id}', exist_ok=True)
     for folder in os.listdir(base_folder):
         if folder == str(contest_id):
             continue
