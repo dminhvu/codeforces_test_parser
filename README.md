@@ -31,4 +31,6 @@ For example: ```.\prepare 1620 A B C D E``` to download problem A, B, C, D, and 
 * Use ```.\run [problem_id]``` to run sample test case (only one problem at a time).
 For example: ```.\run A``` for testing problem A.
 
+* In case your default application for ```.py``` files is not Python, e.g. PyCharm, VSCode, etc. Please use ```python prepare.py``` instead of ```.\prepare``` and ```python run.py``` instead of ```.\run```.
+
 If you find this repository useful, please give it a star :star:!
