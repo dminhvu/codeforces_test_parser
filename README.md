@@ -20,13 +20,13 @@ Codeforces
 codeforces_test_parser
     |---samples
     |      |---[contest_id] # e.g. 1620
-    |           |---A
-    |               |   input0.txt
-    |               |   output0.txt
-    |               |   ...
-    |           |---B
-    |           |---...
-    |   prepare.py
+    |               |---A
+    |                   |   input0.txt
+    |                   |   output0.txt
+    |                   |   ...
+    |               |---B
+    |               |---...
+    |   parse.py
     |   run.py
 ```
 

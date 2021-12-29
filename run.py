@@ -9,7 +9,7 @@ import time
 from threading import Timer
 
 # workspace folder
-workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces"  # replace path/to/your/source_file.cpp here
+workspace_folder = "E:\Code\CompetitiveProgramming\Coding Problems\Codeforces"  # replace path/to/your/workspace here
 # contest id, e.g. 1620 for Educational Codeforces Round 119
 base_folder = 'samples'
 contest_id = os.listdir(base_folder)[0]
@@ -32,11 +32,8 @@ def run_sample_py(problem_id):
 
     n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2  # number of sample test cases
     n_correct = 0  # count correct test cases
-    TLE = False
 
     for i in range(n_cases):
-        if TLE:
-            continue
         print(f'Sample case #{i + 1}:', end=' ')
         with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
@@ -53,8 +50,9 @@ def run_sample_py(problem_id):
                 end_time = time.time()
                 if end_time - start_time > TIMEOUT_SECOND:
                     print('Time Limit Exceeded!')
-                    TLE = True
-                    continue
+                    print('-' * 10)
+                    timer.cancel()
+                    break
             finally:
                 timer.cancel()
 
@@ -67,7 +65,7 @@ def run_sample_py(problem_id):
             your_output = " ".join(your_output.split()).rstrip('\n')
 
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt') as f2:
-                # pre-processing actual output, do not change this
+                # pre-processing expected output, do not change this
                 output = f2.read().strip()
                 output_original = output
                 output = output.lower()
@@ -133,11 +131,8 @@ def run_sample(problem_id):
 
     n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2  # number of sample test cases
     n_correct = 0  # count correct test cases
-    TLE = False
 
     for i in range(n_cases):
-        if TLE:
-            continue
         print(f'Sample case #{i + 1}:', end=' ')
         with open(f'{base_folder}/{contest_id}/{problem_id}/input{i}.txt') as f:
             inp = f.read()
@@ -154,8 +149,9 @@ def run_sample(problem_id):
                 end_time = time.time()
                 if end_time - start_time > TIMEOUT_SECOND:
                     print('Time Limit Exceeded!')
-                    TLE = True
-                    continue
+                    print('-' * 10)
+                    timer.cancel()
+                    break
             finally:
                 timer.cancel()
 
@@ -168,7 +164,7 @@ def run_sample(problem_id):
             your_output = " ".join(your_output.split()).rstrip('\n')
 
             with open(f'{base_folder}/{contest_id}/{problem_id}/output{i}.txt') as f2:
-                # pre-processing actual output, do not change this
+                # pre-processing expected output, do not change this
                 output = f2.read().strip()
                 output = output.lower()
                 output_original = output
