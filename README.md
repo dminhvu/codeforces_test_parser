@@ -1,7 +1,7 @@
 # Codeforces Test Parser for C/C++ & Python on Windows
 
 <p align="center">
-  <img src="https://i.ibb.co/82yzz2Q/example.png" />
+  <img src="https://i.postimg.cc/kXm1mrFT/Windows-Power-Shell-29-12-2021-13-06-38.png" />
 </p>
 
 ### Installation
