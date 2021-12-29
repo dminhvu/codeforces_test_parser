@@ -17,6 +17,9 @@ contest_id = os.listdir(base_folder)[0]
 TIMEOUT_SECOND = 5
 
 
+def print_separator():
+    print('-' * 10)
+
 def run_sample_py(problem_id):
     # these are paths to py file
     # please change this to suit your folder structure
@@ -28,7 +31,7 @@ def run_sample_py(problem_id):
     print(f'Building ...{workspace_folder.split()[-1]}\{contest_id}{problem_id}.py...')
     path_to_py_file = f'{workspace_folder}\{contest_id}{problem_id}.py'
     print('Successfully built!')
-    print('-' * 10)
+    print_separator()
 
     n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2  # number of sample test cases
     n_correct = 0  # count correct test cases
@@ -50,7 +53,7 @@ def run_sample_py(problem_id):
                 end_time = time.time()
                 if end_time - start_time > TIMEOUT_SECOND:
                     print('Time Limit Exceeded!')
-                    print('-' * 10)
+                    print_separator()
                     timer.cancel()
                     break
             finally:
@@ -74,11 +77,11 @@ def run_sample_py(problem_id):
 
                 # compare your output vs actual output
                 if your_output == output:
-                    print('Correct!')
+                    print('\033[92mCorrect!\033[0m')
                     n_correct += 1
                 else:
-                    print('Failed!')
-                print('-' * 10)
+                    print('\033[91mFailed!\033[0m')
+                print_separator()
 
                 # input
                 # print('Input:')
@@ -89,15 +92,18 @@ def run_sample_py(problem_id):
                 print('Output:')
                 print(your_output_original)
                 # print(your_output) # debug
-                print('-' * 10)
+                print_separator()
 
                 # expected output
                 print('Expected:')
                 print(output_original)
                 # print(output) # debug
-                print('-' * 10)
+                print_separator()
 
-    print(f'Result: {n_correct} / {n_cases} test(s) passed!')
+    if n_correct == n_cases:
+        print(f'\033[92mResult: {n_correct} / {n_cases} test(s) passed!\033[0m')
+    else:
+        print(f'\033[91mResult: {n_correct} / {n_cases} test(s) passed!\033[0m')
 
 
 def run_sample(problem_id):
@@ -127,7 +133,7 @@ def run_sample(problem_id):
     path_to_exe_file = f'{workspace_folder}\{contest_id}{problem_id}.exe'
     os.system(f'g++ "{path_to_cpp_file}" -o "{path_to_exe_file}')
     print('Successfully compiled!')
-    print('-' * 10)
+    print_separator()
 
     n_cases = len(os.listdir(f'{base_folder}/{contest_id}/{problem_id}')) // 2  # number of sample test cases
     n_correct = 0  # count correct test cases
@@ -149,7 +155,7 @@ def run_sample(problem_id):
                 end_time = time.time()
                 if end_time - start_time > TIMEOUT_SECOND:
                     print('Time Limit Exceeded!')
-                    print('-' * 10)
+                    print_separator()
                     timer.cancel()
                     break
             finally:
@@ -173,11 +179,11 @@ def run_sample(problem_id):
 
                 # compare your output vs actual output
                 if your_output == output:
-                    print('Correct!')
+                    print('\033[92mCorrect!\033[0m')
                     n_correct += 1
                 else:
-                    print('Failed!')
-                print('-' * 10)
+                    print('\033[91mFailed!\033[0m')
+                print_separator()
 
                 # input
                 # print('Input:')
@@ -188,15 +194,18 @@ def run_sample(problem_id):
                 print('Output:')
                 print(your_output_original)
                 # print(your_output) # debug
-                print('-' * 10)
+                print_separator()
 
                 # expected output
                 print('Expected:')
                 print(output_original)
                 # print(output) # debug
-                print('-' * 10)
+                print_separator()
 
-    print(f'Result: {n_correct} / {n_cases} test(s) passed!')
+    if n_correct == n_cases:
+        print(f'\033[92mResult: {n_correct} / {n_cases} test(s) passed!\033[0m')
+    else:
+        print(f'\033[91mResult: {n_correct} / {n_cases} test(s) passed!\033[0m')
     os.remove(f'{workspace_folder}\{contest_id}{problem_id}.exe')
 
 
